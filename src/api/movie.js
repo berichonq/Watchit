@@ -1,10 +1,9 @@
 import axios from "axios";
-import { FAKE_POPULARS, FAKE_RECOMMENDATIONS } from "./fakedata";
-import { BASE_URL, API_KEY_PARAM } from "../config.js";
+import { BASE_URL } from "../config.js";
 
 export class MovieAPI {
   static async fetchPopular() {
-    const response = await axios.get(`${BASE_URL}movie/popular${API_KEY_PARAM}`);
+    const response = await axios.get(`${BASE_URL}movie/popular?api_key=${import.meta.env.VITE_API_KEY_PARAM}`);
     return response.data.results;
 
     // return FAKE_POPULARS;
@@ -12,7 +11,7 @@ export class MovieAPI {
 
   static async fetchRecommendations(movieId) {
     const response = await axios.get(
-      `${BASE_URL}movie/${movieId}/recommendations${API_KEY_PARAM}`
+      `${BASE_URL}movie/${movieId}/recommendations?api_key=${import.meta.env.VITE_API_KEY_PARAM}`
     );
     return response.data.results;
 
@@ -20,7 +19,7 @@ export class MovieAPI {
   }
 
   static async fetchByTitle(title) {
-    const response = await axios.get(`${BASE_URL}search/movie${API_KEY_PARAM}&query=${title}`);
+    const response = await axios.get(`${BASE_URL}search/movie?api_key=${import.meta.env.VITE_API_KEY_PARAM}&query=${title}`);
 
     return response.data.results
   }
